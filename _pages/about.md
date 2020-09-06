@@ -2,9 +2,7 @@
 title: "About"
 permalink: /about/
 excerpt: "About Me"
-layout:posts
 last_modified_at: 2020-09-06T21:31:00+09:00
-toc: true
 ---
 
 ## Education
