@@ -95,7 +95,7 @@ analytics:
 author:
   name             : "JUNSUK SHIM"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "M.S. Student\nComputer ARchitecture & Embedded Systems Lab (CARES)\nhttp://cares.snu.ac.kr\nDepartment of Computer Science and Engineering.\nSeoul National University (SNU)"
+  bio              : "M.S. Student\n Computer ARchitecture & Embedded Systems Lab (CARES)\n http://cares.snu.ac.kr\n Department of Computer Science and Engineering.\n Seoul National University (SNU)"
   location         : "Republic of Korea"
   email            : "junsukshim@gmail.com"
   links:
