@@ -95,8 +95,11 @@ analytics:
 author:
   name             : "JUNSUK SHIM"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : ""
-  location         : "Republock of Korea"
+  bio              : "
+  M.S., SNU 2020~
+  B.S., UNIST 2015~2020
+  "
+  location         : "Republic of Korea"
   email            : "junsukshim@gmail.com"
   links:
     - label: "Email"
