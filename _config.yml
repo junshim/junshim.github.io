@@ -95,12 +95,7 @@ analytics:
 author:
   name             : "JUNSUK SHIM"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : >
-          M.S. Student\n
-          Computer ARchitecture & Embedded Systems Lab (CARES)\n 
-          http://cares.snu.ac.kr\n 
-          Department of Computer Science and Engineering.\n 
-          Seoul National University (SNU)
+  bio              : "공부 했던 것들 까먹지 않기 위해 기록하는 곳"
   location         : "Republic of Korea"
   email            : "junsukshim@gmail.com"
   links:
