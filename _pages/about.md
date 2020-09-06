@@ -2,7 +2,7 @@
 title: "About"
 permalink: /about/
 excerpt: "About Me"
-author_profile: ture
+author_profile: true
 last_modified_at: 2020-09-06T21:31:00+09:00
 ---
 
