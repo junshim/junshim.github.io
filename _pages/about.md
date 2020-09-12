@@ -1,10 +1,13 @@
 ---
-title: "About"
 permalink: /about/
+title: "About"
 excerpt: "About Me"
-author_profile: true
+layout: archive
 last_modified_at: 2020-09-06T21:31:00+09:00
+toc: true
 ---
+
+
 
 ## Education
  - **M.S., Computer Science and Engineering** (2020∼ )
