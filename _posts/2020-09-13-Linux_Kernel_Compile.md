@@ -117,6 +117,6 @@ $ sudo dpkg -i {커널이미지파일명}
 ## Reference
 포스트를 작성하면서 참고한 블로그들을 레퍼런스합니다.  
 
-[1] https://harryp.tistory.com/839
-[2] https://marcokhan.tistory.com/246
-[3] https://5equal0.tistory.com/entry/Linux-Kernel-Kernel-%EB%B9%8C%EB%93%9C-%EB%B0%8F-%EC%84%A4%EC%B9%98
+[1] <https://harryp.tistory.com/839>
+[2] <https://marcokhan.tistory.com/246>
+[3] <https://5equal0.tistory.com/entry/Linux-Kernel-Kernel-%EB%B9%8C%EB%93%9C-%EB%B0%8F-%EC%84%A4%EC%B9%98>
