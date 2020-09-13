@@ -8,9 +8,14 @@ author_profile: true
 toc: true
 ---
 
-#JUNSUK SHIM
+# 심준석
+Junsuk Shim
 
-##Contact Information
+## Research Interests
+Storage System / Operating Systems / Computer Archithecture /
+Machine Learning / In-storage Computing / Embedded System /
+
+## Contact Information
 junsukshim@gmail.com
 jsshim@davinci.snu.ac.kr
 
