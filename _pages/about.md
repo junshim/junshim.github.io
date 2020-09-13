@@ -4,10 +4,15 @@ title: "About"
 excerpt: "About Me"
 layout: archive
 last_modified_at: 2020-09-06T21:31:00+09:00
+author_profile: true
 toc: true
 ---
 
+#JUNSUK SHIM
 
+##Contact Information
+junsukshim@gmail.com
+jsshim@davinci.snu.ac.kr
 
 ## Education
  - **M.S., Computer Science and Engineering** (2020∼ )
