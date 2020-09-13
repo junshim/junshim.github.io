@@ -21,15 +21,15 @@ toc: true
 $ uname -r
 ```
 저의 경우 Ubuntu 20.04.1 LTS를 설치했을 때 기본으로 제공되는 5.4.0-47-generic 입니다.  
-![Linux_kernel_compile_image1]({{site.url}}/assets/images/Linux_kernel_compile_1.jpg)  
+![Linux_kernel_compile_image1]({{site.url}}/assets/images/20200913/Linux_kernel_compile_1.jpg)  
 
 ## 설치할 커널 소스 다운로드
 [리눅스 커널 홈페이지](ttps://www.kernel.org/)에서 원하는 커널 버전을 다운로드 합니다. 이 예제에서는 [목록에서](https://kernel.org/pub/linux/kernel/v5.x/linux-5.4.59.tar.gz) 5.4.59 버전을 다운 받았습니다.  
-![Linux_kernel_compile_image2]({{site.url}}/assets/images/Linux_kernel_compile_2.jpg)  
+![Linux_kernel_compile_image2]({{site.url}}/assets/images/20200913/Linux_kernel_compile_2.jpg)  
 
 ## 다운로드한 커널 소스 이동 및 압축 해제
 다운로드한 커널 소스를 **'/usr/src'** 위치로 옮겨준 뒤, 압축을 해제합니다. ( root user로 진행했습니다.)  
-![Linux_kernel_compile_image3]({{site.url}}/assets/images/Linux_kernel_compile_3.jpg)  
+![Linux_kernel_compile_image3]({{site.url}}/assets/images/20200913/Linux_kernel_compile_3.jpg)  
 
 ## 컴파일 준비
 압축 해제한 폴더로 이동해서 다음과 같이 컴파일에 필요한 준비를 진행합니다.  
@@ -56,10 +56,10 @@ $ sudo apt-get install build-essential libncurses5 libncurses5-dev bin86 kernel-
    
   
 그러면 다음과 같은 화면을 보실 수 있습니다.  
-![Linux_kernel_compile_image4]({{site.url}}/assets/images/Linux_kernel_compile_4.jpg)  
+![Linux_kernel_compile_image4]({{site.url}}/assets/images/20200913/Linux_kernel_compile_4.jpg)  
 
 해당 화면에서 **load** 를 선택하면 아래 화면이 나오고, **ok** 를 선택한 뒤, **Exit**, **Yes** 를 통해 나오시면 됩니다.  
-![Linux_kernel_compile_image5]({{site.url}}/assets/images/Linux_kernel_compile_5.jpg)  
+![Linux_kernel_compile_image5]({{site.url}}/assets/images/20200913/Linux_kernel_compile_5.jpg)  
 
 ## 커널 컴파일 진행
 이제 준비는 끝났고 실제 컴파일을 진행할 차례입니다.  
@@ -70,7 +70,7 @@ $ sudo apt-get install build-essential libncurses5 libncurses5-dev bin86 kernel-
 grep -c processor /proc/cpuinfo
 ```
 저는 아래 그림과 같이 8개 입니다.  
-![Linux_kernel_compile_image6]({{site.url}}/assets/images/Linux_kernel_compile_6.jpg)  
+![Linux_kernel_compile_image6]({{site.url}}/assets/images/20200913/Linux_kernel_compile_6.jpg)  
 
 ### 2. 커널 컴파일에 필요한 툴 설치
 사실 에러가 날때마다 바로바로 찾아서 추가했던지라 커널 컴파일에 관련된 툴과 패키지는 어떤 것들이 있는지 정확히 모릅니다. 제가 참고한 다른 블로그에서 아래 것들을 설치하고 진행하라고 하길래 추가해 봅니다.  
@@ -88,14 +88,14 @@ sudo apt-get install ncurses-dev libssl-dev kernel-package
  ```
 
  {#} 이 부분에 코어 갯수를 넣어주시면 됩니다. 저는 8개이기 때문에 아래 그림과 같이 했고 컴파일이 시작되는 것을 볼 수 있습니다.  
-![Linux_kernel_compile_image7]({{site.url}}/assets/images/Linux_kernel_compile_7.jpg)  
+![Linux_kernel_compile_image7]({{site.url}}/assets/images/20200913/Linux_kernel_compile_7.jpg)  
  > --revision=1.0 은 만드는 커널 이미지의 유저의 버전을 정할 수 있습니다. 보통 커널을 수정하여 사용할 때 각 커널이 다름을 표시하기 위해 사용합니다.  
 
 완료되면 아래와 같은 화면을 보실 수 있고,
-![Linux_kernel_compile_image8]({{site.url}}/assets/images/Linux_kernel_compile_8.jpg)  
+![Linux_kernel_compile_image8]({{site.url}}/assets/images/20200913/Linux_kernel_compile_8.jpg)  
 
 상위 폴더 (저희의 경우 **/usr/src**에서 다음과 같은 커널 이미지(.deb 파일)을 보실 수 있습니다.
-![Linux_kernel_compile_image9]({{site.url}}/assets/images/Linux_kernel_compile_9.jpg)  
+![Linux_kernel_compile_image9]({{site.url}}/assets/images/20200913/Linux_kernel_compile_9.jpg)  
 
 ### 4. 커널 이미지 설치(등록)
 커널 이미지가 있는 폴더에서(**/usr/src**) 다음 명령어를 실행해 주시면 됩니다.  
@@ -103,12 +103,12 @@ sudo apt-get install ncurses-dev libssl-dev kernel-package
 $ sudo dpkg -i {커널이미지파일명}
 ```
 저의 경우는 다음과 같습니다.  
-![Linux_kernel_compile_image10]({{site.url}}/assets/images/Linux_kernel_compile_10.jpg)  
+![Linux_kernel_compile_image10]({{site.url}}/assets/images/20200913/Linux_kernel_compile_10.jpg)  
 > 아마 출력문이 다르실 것 입니다. 이 이미지는 명령어 사용 예제로만 보시고, 실제 사용시 마지막에 done로 종료되는 것만 보시면 됩니다!  
 
 ### 5. Reboot
 지금까지 새로운 커널 설치를 완료했습니다. 정상적으로 설치가 되었다면 재부팅한 위에 위에서와 같은 방식으로 커널의 버전을 확인했을 때 커널 버전이 바뀐 것을 확인할 수 있습니다. 저의 경우는 다음과 같이 바뀐 것을 확인할 수 있었습니다.  
-![Linux_kernel_compile_image11]({{site.url}}/assets/images/Linux_kernel_compile_11.jpg)  
+![Linux_kernel_compile_image11]({{site.url}}/assets/images/20200913/Linux_kernel_compile_11.jpg)  
 
 ## Conclusion
  이 포스트는 리눅스의 컴파일을 다루어 보았습니다. 학부 연구생 시절 커널 관련해서 제일 처음 해봤던 것인데, 간단하지만 뭔가에 막혀 되게 오래 걸렸던 기억이 있습니다. 꼭 블로그를 만들게 되면 이것을 처음 포스트로 하자 했었는데 이렇게 이루게 되어 기쁩니다ㅎㅎ 
