@@ -122,9 +122,9 @@ $ dmesg
  이번 포스팅에서는 5.x 버전의 커널에 간단한 시스템 콜을 구현하고 실행시켜봤습니다. 커널 메세지를 출력하는 간단한 코드를 사용했는데, 개인의 필요에 따라 이 부분을 바꿔주며 사용하면 될 것 같습니다.
  
 ## Reference
-참고한 페이지를 참조합니다.
-[1] https://medium.com/anubhav-shrimal/adding-a-hello-world-system-call-to-linux-kernel-dad32875872  
-[2] https://harryp.tistory.com/69  
-[3] https://isme2n.github.io/devlog/2017/05/30/linux-systemcall-add/  
+참고한 페이지를 참조합니다.  
+[1] <https://medium.com/anubhav-shrimal/adding-a-hello-world-system-call-to-linux-kernel-dad32875872i>  
+[2] <https://harryp.tistory.com/69>  
+[3] <https://isme2n.github.io/devlog/2017/05/30/linux-systemcall-add/>  
 
 [^1]: 본인의 커널 버전에 맞게 위치를 사용해주세요!
