@@ -1,6 +1,18 @@
-﻿# 시스템 콜 추가하기 (Add a New System Call)  
+﻿---
+title: "시스템 콜 추가하기 (Add a New System Call)"
+categories: 
+  - Linux Kernel Study
+tags:
+  - Linux
+  - Kernel
+  - 리눅스
+  - 커널
+  - 공부
+last_modified_at: 2020-09-19T22:00:00+09:00
+toc: true
+---
 
- 이 포스트는 새로운 user system call을 정의하고 그것을 커널에 추가하는 과정을 다룹니다. 
+ 이 포스트는 새로운 user system call을 정의하고 그것을 리눅스 커널에 추가하는 과정을 다룹니다. 
  
  커널을 공부하고 가지고 놀아볼 때 보통 가장 처음으로 해보는 것이 시스템 콜 구현입니다. 하지만 대부분의 커널 책이 지금 사용하는 커널 보다 낮은 커널 버전을 기준으로 하고 있어 최신 커널 버전에서의 시스템 콜 구현을 정리해 보고자 합니다. 이 포스팅에서는 저번 포스팅에서 컴파일 했던  linux kernel 5.4.59을 사용하여 진행합니다.  
 
