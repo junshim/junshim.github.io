@@ -69,7 +69,7 @@ asmlinkage long __sys_hello(void)
 
 **이때 설정해준 시스템 콜 번호를 꼭 기억해야 합니다!**  
 
- ## 시스템 콜 헤더파일에 등록 (Update system call header file)  
+## 시스템 콜 헤더파일에 등록 (Update system call header file)  
  마지막으로 구현한 시스템 콜을 시스템 콜 헤더파일에 prototype 을 설정해 줍니다. 시스템 콜의 해더파일은 **/usr/src/linux-5.4.59/include/linux/syscalls.h**에 정의되어 있습니다.  
 ![syscall_define_6]({{site.url}}/assets/images/syscall_define_200919/syscall_define_6.jpg)
  해당 파일의 마지막에 있는 **#endif 앞에** 다음과 같이 자신의 함수 정의에 맞게 작성해 줍니다.  
