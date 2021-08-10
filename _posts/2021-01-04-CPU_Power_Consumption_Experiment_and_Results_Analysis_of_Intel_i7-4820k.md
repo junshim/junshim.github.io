@@ -1,5 +1,5 @@
 ﻿---
-title: "Review of CPU Power Consumption Experiment and Results Analysis of Intel i7-4820k"
+title: "[Paper Review] CPU Power Consumption Experiment and Results Analysis of Intel i7-4820k"
 categories:
   - Paper Review
 tags:

@@ -1,5 +1,5 @@
 ﻿---
-title: "Add a New System Call (시스템콜 추가하기)"
+title: "[Linux] Add a New System Call (시스템콜 추가하기)"
 categories: 
   - Linux Kernel Study
 tags:

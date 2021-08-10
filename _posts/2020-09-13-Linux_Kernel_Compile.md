@@ -1,5 +1,5 @@
 ﻿---
-title: "Linux Kernel Compile (리눅스 커널 컴파일)"
+title: "[Linux] Linux Kernel Compile (리눅스 커널 컴파일)"
 categories: 
   - Linux Kernel Study
 tags:
