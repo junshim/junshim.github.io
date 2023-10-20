@@ -21,7 +21,7 @@ Storage System / Operating Systems / Computer Archithecture / Machine Learning /
 junsukshim@gmail.com  
 jsshim@davinci.snu.ac.kr  
 
-#Publication
+## Publication
 [Google Scholar](https://scholar.google.com/citations?user=be6PiWsAAAAJ&hl=ko&oi=sra)
 
 ## Education
