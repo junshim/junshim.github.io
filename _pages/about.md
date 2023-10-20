@@ -9,22 +9,23 @@ toc: true
 ---
 
 심준석 (Junsuk Shim)  
-M.S Student  
+PH.D Student  
 [Computer ARchitecture & Embedded Systems Lab (CARES)](http://cares.snu.ac.kr)   
 Department of Computer Science and Engineering  
 Seoul National University (SNU)  
-
 
 ## Research Interests
 Storage System / Operating Systems / Computer Archithecture / Machine Learning / In-storage Computing / Embedded System /  
 
 ## Contact Information
-
 junsukshim@gmail.com  
 jsshim@davinci.snu.ac.kr  
 
+#Publication
+[Google Scholar](https://scholar.google.com/citations?user=be6PiWsAAAAJ&hl=ko&oi=sra)
+
 ## Education
- - **M.S., Computer Science and Engineering** (2020∼ )  
+ - **M.S.-PH.D., Computer Science and Engineering** (2020∼ )  
 	 - [Seoul National University](https://www.snu.ac.kr/) (SNU), Korea  
 	 - [Computer ARchitecture & Embedded Systems Lab](http://cares.snu.ac.kr) (CARES)  
 	 - Advisor : Jihong Kim  
