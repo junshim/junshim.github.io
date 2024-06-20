@@ -1,5 +1,5 @@
 ---
-title: "[Paper Review] Improving Language Understanding by Generative Pre-Training"
+title: "[Paper Review] Lifetime Management of Flash-Based SSDs Using Recovery-Aware Dynamic Throttling"
 categories:
   - Paper Review
 tags:
@@ -12,7 +12,7 @@ toc: true
 ---
 
 # Paper Info
-Titile: "Improving Language Understanding by Generative Pre-Training"  
+Titile: "Lifetime Management of Flash-Based SSDs Using Recovery-Aware Dynamic Throttling"  
 Publisher: FAST'12  
 Initial release: FEB 12
 
@@ -28,10 +28,16 @@ Limited and unpredictable lifetime of SSDs.
 SSDs in enterprise systems.  
 
 # Motivation Problem
-### > 
+### > The poor write endurance of NAND flash memory
 
 # Key Idea
-### > Make throttling decisons dynamically based on the predicted future write demand of a workload
-the required SSD lifetime can be guraneed with less performance dgradation.
+### > Make throttling decisons dynamically based on the predicted future write demand of a workload  
+the required SSD lifetime can be guraneed with less performance dgradation.  
+
+## > Self-recovery effect of floating-gate transistors  
+Improves the endurance of SSDs  
+Enabling to guarantee the required lifetime with less write throttling.  
+
+
 
 # Note for Remembering
