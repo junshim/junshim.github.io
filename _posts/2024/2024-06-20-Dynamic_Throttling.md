@@ -28,13 +28,14 @@ Limited and unpredictable lifetime of SSDs.
 SSDs in enterprise systems.  
 
 # Motivation Problem
-### > The poor write endurance of NAND flash memory
+## The poor write endurance of NAND flash memory
+  
 
 # Key Idea
-### > Make throttling decisons dynamically based on the predicted future write demand of a workload  
+## Make throttling decisons dynamically based on the predicted future write demand of a workload  
 the required SSD lifetime can be guraneed with less performance dgradation.  
 
-## > Self-recovery effect of floating-gate transistors  
+## Self-recovery effect of floating-gate transistors  
 Improves the endurance of SSDs  
 Enabling to guarantee the required lifetime with less write throttling.  
 
