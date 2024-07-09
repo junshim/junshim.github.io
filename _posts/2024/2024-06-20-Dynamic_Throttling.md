@@ -76,13 +76,48 @@ The damage caused by repetitive P/E cycles can be partially recovered during the
 ### Three main functions.  
 Write demand predictor: predicting future write demands.  
 The entire lifetime($T_{ssd}$) of the SSD is divided into epochs.
-At teh beginning of each epoch, estimate the number of bytes that is to be written during the epoch, based on the number of bytes actually written to teh SSD during the latest epoch.  
+At the beginning of each epoch, estimate the number of bytes that is to be written during the epoch, based on the number of bytes actually written to teh SSD during the latest epoch.  
 Enterprise workloads often exhivit cyclic behavior with periods between servaral minutes and several days.  
 This means that if the length of an epoch is properly decided to include the cyclic period of a workload, the write demand observed in the latest poch can be used as a factor that indicates future write demands.
 The best epoch length may be different depending on a workload and its characteristic.
 
 Throttling delay estimator: determines a throttling delay by considering both the future write demand and the remaining lifetime of SSDs.  
-Epoch-capacity regulator: apply a throttling delay to each write request.  
+At the beginning of each i-th epoch, the delay estimator increases or decreases a throttling delay, based on the expected write demand and the capacity of each epoch.  
+The expected write demand ($w_{i}$) is equal to the number of bytes written during the (i-1)-th epoch.  
+The capacity of i-th epoch ($c_{i}$) is determined by dividing the remaining capacity of SSD by the number of remaining epochs.  
+If $w_{i} == c_{i}$, then $t^{delay}_{i} == t^{delay}_{i-1}$.  
+If $w_{i} > c_{i}$, then $t^{delay}_{i} == t^{delay}_{i-1} + \Delta t^{delay}_{i-1}$, where $\Delta t^{delay}_{i-1} = t_{epoch} \cdot (w_{i}/c_{i} - 1) / n$.  
+If $w_{i} < c_{i}$, then $t^{delay}_{i} == t^{delay}_{i-1} - \Delta t^{delay}_{i-1}$, where $\Delta t^{delay}_{i-1} = t_{epoch} \cdot (c_{i}/w_{i} - 1) / n$.  
+The estimator then calculates the remaining capacity based on teh achievable P/E cycles and distributes it to the remaining epochs.
+The number of achievable P/E cycles is estimated, using the average idle time of every block in the SSD.
+
+Epoch-capacity regulator: apply a throttling delay to each write request and adopt an epoch-capacity enforcement policy.  
+Once a throttling delay is decided, we throttle SSD performance by distributing throttling delays across evert write as evenly as possible.  
+If write demand prediction fails and unexpectedly high write traffic comes from the host, it can not guarnantee the required lifetime.  
+Do prevent more data than the epoch capacity from being written to the SSD.  
+Pessimistic epoch-capacity enforcement policy: Stop writing if the epoch capacity is likey to be exhausted before the epoch ends.  
+\- Divide one epoch into periods whose lengths are 1 second each and then distributes the capacity of an epoch to all periods evenly.  
+\- If there is an unused, reallocates it to the next period.  
+\- Maintain the minimum write throughput.  
+\- If stop after the eoch capacity is exhausted, significant performance degradation.  
+\- Does not efficiently handle a bursty I/O pattern.  
+Optimistic epoch-capacity enforcement policy: maintains a relatively small amount of the spare capacity for each epoch and forcibly throttles write performance only when both the capacity of a period and the spare capacity are exhausted.  
+\- The spare capacity must be carefully chosen.  
+\- In this work, the spare capacity is empirically set to 10% of the remaining capacity of the SSD.  
+
+
+### Epoch Length Selection
+Since a throttling delay is determinced by the write demand of the previous epoch, the incorrect poch length can make a large fluctuation in teh overall I/O reponse time of the SSD.  
+Monitor write demands of a workload and fine repeated cycles that show similar write demands.
+The new epoch length is determined under the assumption that there are no throttling delays.
+Calculate the write-demand difference ratio of two consecutive epochs i and i+1 with the same length.
+Calculate the average write-demand difference ratio.
+INcrrease the length of a candidate epoch by one unit-time window and repeat.
+Chose smallest difference ratio as epoch length.
+To mitigate the computational overhead caused by epoch length selection, the poch length is recalcuated when the write-demand difference ratio between the predicted write demand and actural one is higer than 0.25, three times successively.
+
+
+
 
 
 # Note for Remembering
