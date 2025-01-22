@@ -12,7 +12,7 @@ toc: true
 
 해당 카테고리에서는 **Embedded Recipes**을 공부하면서 기억해 둘 것을 정리해논 곳 입니다.  
 Start: 2025 01 07
-Last: 2025 01 08
+Last: 2025 01 20
 End:
 
 # 1. Hardware Collage
@@ -161,8 +161,42 @@ BUS는 장치들이 정보 공유를 위해서 송유하는 선들의 집합
 +) time high to low (tTHL), tf (Falling time): 90% -> 10%  
 Timing과 관련된 다양한 Nitation 존재: clock, high to low, transient, high/low to high, bus stable, bus to high impedance, bus change, high impedance to stable bus, heavy line indicates region of interest  
 
+Memory: System 구성과 Performance에 가장 큰 영향을 행사  
+RAM: 휘발성, Random Access(byte 단위 접근) 가능; SRAM, PSRAM, DRAM (SDRAM, DDR SDRAM)  
++) DRAM은 일정 시간마자 전하를 충전해 주어야함  
++) SDRAM:  synchronous dram
++) DDR: double data rate, system bus의 rising edege와 falling edge 에서 모두 동작 가능  
+ROM: 비휘발성, Flash Memory, 지우고 다시 쓸 수 있음; NOR Memory, Random Access 가능; NAND Memory, 큰 단위 접근  
++) NOR는 코드 저장용, NAND는 데이터 저장용으로 많이 활용됨        
+XIP (eXecution-In-Place): software를 메모리에 로드하여 실행하는 대신 플래시에서 직접 수행하는 기술  
++) flash에 용례를 국한하기도 하지만, 모든 메모리 소자에 사용되기도 함  
++) word 단위 access 가 가능하며 software를 execution 하는 것  
++) NAND는 불가능  
 
+RAM Memory는 Address Pin과 Data Pin, 그리고 RD WR pin으로 구성  
++) Address Pin으로 접근할 Address 선정, RD/WR Pin으로 동작 결정, Data Pin으로 쓸/읽을 데이터 결정  
++) 1 byte 당 1 address 차지  
++) Address bus Width가 16 bit이라면, 2^16 * 1 byte으로 64KB size의 RAM  
 
-
-
+CPU는 여러가지 일을 해낼 수 있는 논리회로 집합  
++) 프로그램의 명령어를 처리하기 위한 논리회로의 집합  
++) CPU에 나와있는 pin들에 약속된 신호를 받아 일을 수행  
++) 하나의 기계어 명령을 수행하기 위해서는 여러개의 마이크로 명령이 수행  
++) 마이크로 명령어는 CPU내의 각종 게이트를 구동하는 비트신호로 CPU 내 제어 기억 장치에 저장  
+CPU 내부에는 여러 장치가 존재  
++) 제어 장치 CU: 각종 제어 신호 발생, Decoder에서 받아온 것을 각종 제어 신호로 변환  
++) Decoder: 명령어를 읽어 해석, IR에서 가져온 intruction을 해석해서 CU에 넘김    
++) 연산장치 ALU: 산술 연산을 담당  
++) 저장공간 Register  
++) Program Counter: CPU가 실행하는 intruction 주소    
++) Instruction Register (IR): Intruction 주소에서 읽어온 instruction을 담음  
++) Address Register:현재 사용하는 Data를 Access 하기 위한 Data의 주소  
++) Data Register: Address Register가 가리키는 주소의 실제값  
+CPU외 여러 기능을 덧붙여 한 개의 chip으로 만든 것이 MCU(Moro Controller Unit)  
+CPU의 step (stage)
++) Fetch: intruction을 메모리로부터 가지고옴, PC -> Address register -> External Memory -> IR-> PC update  
++) Decode: 가지고온 intruction을 해석하고 Register 값 확인, IR -> Decoder
++) Execution: intruction 실행, CU -> External Memory -> Data Register -> ALU -> ACC, CU -> ALU -> ACC -> External Memory  
+Pipeline: 각 Stage가 서로 다른 순차 intruction을 실행  
++) PC 값은 fetch하고 있는 곳을 가르키기에 현재 Execution 하는 것보다 앞섬  
 
