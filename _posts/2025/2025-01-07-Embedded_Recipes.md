@@ -200,3 +200,53 @@ CPU의 step (stage)
 Pipeline: 각 Stage가 서로 다른 순차 intruction을 실행  
 +) PC 값은 fetch하고 있는 곳을 가르키기에 현재 Execution 하는 것보다 앞섬  
 
+ARM Processor 다룰 내용의 기본 특징: 32-bit RISC, Big/Little Endian 지원, Fast Interrupt Response  
++) 주요 개념: Mode, Register, Exception  
++) MCU의 CPU 부분인 core만 의미함  
+Micro Processor는 CISC(Complex Instrcution Set Cimputer)와 RISC(Reduced Instruction Set Computer)로 나뉨  
++) CISC는 많은 수의 명령어와 데이터 형태, 그리고 Addressiong 기법들을 모두 채택하여 Chip의 크기가 크며, 명령어가 복잡하고, Chip이 복잡  
++) RISC는 많이 사용되는 명령어, 데이터 형태, Addressing 기법등만을 모아 단순하게 만듬  
++) RISC는 명령어 길이가 고정, 종류가 많지 않고, 적은 수의 Addressiong 기법으로 chip의 복잡도도 단순하고 크기도 작아지고 ,전력소비도 작음  
++) CISC에서 한줄이면 해결될 일등리 RISC에서는 여러 줄을 거치기도 함, 즉 Performance가 떨어질 수 있음  
+
+ARM mode: 32 bit 동작 (bus line)  
+Thumb mode: 16 bit 동작 모드 (bus line)  
+
+ARM 동작 모드, 사용자 취향에 맞게 쓰라고 되어있음  
++) User mode만 normal mode이고 나머진 privileged mode임  
++) User Mode: normal program exectution mode  
++) System model: Run priviledged operating sstem tasks  
++) FIQ: When a high priority (fast) interrupt is raised  
++) IRQ: Wheb a low priority (normal) interrupt is raised  
++) Supervisor: A proitected mode ofr the operating system, entered when a SWI insturciton is executed  
++) Abort: Used to handle memotry access violations  
++) Undef: Used to handle undefined instructions  
++) privileged mode는 스스로 mode 변경이 가능하며 interrupt의 사용 가능 유미를 직접 설정 가능  
+
+Register는 Core가 사용할 수 있는 가장 빠른 저장 매체  
++) ARM의 동작은 모두 register들을 어떻게 장난칠 것이냐임  
+동작 모드가 바뀌면 Register Set도 바뀜  
+총 37개  
++) R0~R15 (16개)  
++) CPSR (1개)  
++) FIQ의 R8~R14, SPSR (8개)  
++) SVC의 R13 R14 SPSR (3개)  
++) Abort의 R13 R14 SPSR (3개)  
++) IRQ의 R13 R14 SPSR (3개)  
++) UND의 R13 R14 SPSR (3개)  
+CPSR (Current Program Status Register)  
++) Flag field: NZCV, 방금 처리된 연산 결과의 상태  
++) IF field: IRQ, FIQ의 Enable, Disable, Interrupt가 걸리지 않도록 control  
++) T field: Thumb mode or ARM mode  
++) Mode field: SVC, UND, ABT 등 CPU 상태 나타냄, 원하는 mode로 세팅하면 그 모드로 전환  
+SPSR (Saved Program Status Register)  
++) CPSR을 복사해 넣는 register (Backup), 모드가 바뀌고 다시 돌아오기 위해  
+R14 Linked Register: 어디서 branch 해 왔는지 표기  
+R13 Stack Pointer: 현재 stack이 어디까지 쌓였는지  
+R15 Program counter: 현재 어디를 수행하고 있는건지, fetch해온 위치  
+R0~R12는 General Register, R13~R15 + CPSR + SPSR은 Special Purpose Register  
+Context: Register Set의 Snap Shot, 현재 Register 값들의 상황  
+
+
+
+
