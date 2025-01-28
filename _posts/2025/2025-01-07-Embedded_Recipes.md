@@ -247,6 +247,36 @@ R15 Program counter: 현재 어디를 수행하고 있는건지, fetch해온 위
 R0~R12는 General Register, R13~R15 + CPSR + SPSR은 Special Purpose Register  
 Context: Register Set의 Snap Shot, 현재 Register 값들의 상황  
 
+ARM Exception: hardware적으로 특정 mode로의 진입 유발자  
++) interrupt는 excption의 한 종류  
++) Exception이라는 사건을 통해 hardware 적으로 정해진 reaction이 발생  
++) Reaction은, exception이 발생하면, 진행하던 동작을 멈추고, exception에 해당하는 mode에 진입하고, exception이 물려있는 주소로 pc를 jump시킨 뒤 처리하는 형태  
++) SVC mode는 ARM에 전원이 인가(power on)되거나 reset되면 해당 주소로 jump  
++) IRQ mode는 hardware적인 interrupt가 발생하여 ARM Core에 알려주면 해당 주소로 jump  
++) FIQ mode는 interrupt 중 fast interrupt 가 발생하면 해당 주소로 jump  
++) ABORT mode는 data abort(access 하려는 주소가 불가한 주소, memory faults), prefetch abort(intruction fetch를 해오려는 데 못해온 경우) 같은 경우 해당 주로소 jump  
++) UNDEF mode의 경우 undef exception(unstruction을 decode 했는데 ARM이 모르는 경우)이 났을 경우 jump  
++) 특정 주소로 PC를 Jump한다는 것은, pc 값을 그 값으로 setting한다는 의미  
+Exception Vector Table: exception이 났을 때 jump하는 address를 모은 것  
++) exception vector: excption이 발생하면 하드웨어가 수행시키는 미리 정해진 address  
+CPSR register 값이 어떻게 setting 되냐에 따라 mode가 구분됨  
++) 이 값에 따라 사용되는 Register set과 stack이 바뀜  
+Exception이ㅔ도 우선 순위가 있음  
+Exception이 발생하면...  
++) 이전 모드로 돌아가기 위한 세팅 진행  
++) CPSR을 변경될 모드의 SPSR에 저장  
++) CPSR을 변경될 모드의 값으로 변경 및 실제 mod 변경과 register 변경  
++) ARM mode로 변경: exception은 무존건 ARM mode  
++) R14를 현재 PC (돌아갈 PC로 설정)  
++) PC를 reaction 주소로 변경  
++) R0~R12를 R13이 가리키는 stack에 저장  
++) SW적으로 reaction 수행 후 돌아가는 (return) 같은 명령어로 돌아갈 수 있게 해줘야함
+Excption이 종료되면...  
++) CPSR에 SPSR에 있는 값으로 변경 (이전 mode로 돌아감)  
++) stack에 저장된 register 값들 복원  
++) PC에 저장되어 있던 R14의 값 복원  
+
+
 
 
 
