@@ -276,7 +276,43 @@ Excption이 종료되면...
 +) stack에 저장된 register 값들 복원  
 +) PC에 저장되어 있던 R14의 값 복원  
 
+ARM Procedure Call Standard (PSC): ARM 내부의 Register 사용법 총칭  
++) 여러 버전이 존재함  
+R0~R3: Argument / Result / Scratch  
++) Argument: 함수를 호출할 때의 Argument가 저장 됨, 순서대로  
++) Result: 함수가 return 될 때의 결과들이 저장되며, 기본적으로 R0가 사용되나 크기가 크면 다른 것 까지  
++) Scratch: 함수가 호출된 후에는 규칙 내에서 자유롭게 쓰일 수 있다는 의미  
+R4~R11: variable 용  
++) 로컬 변수에서 활용  
++) 호출 당한 함수는 이전 함수의 값을 유지해주어야 하기 때문에 stack에 저장 후 사용하고 끝나기 전에 복원해 줘야함  
+R12~R15: 특수 register들  
++) R12: ARM-Rhumb interworking, long branch등에 사용  
++) R13: SP, Stack Pointer  
++) R14: LP, Link Register, 돌아올 주소를 넣는 목적  
++) R15: PC, Program Counter, 현재 실행하고 있는 주소 ( Fetch 하고 있는 주소 )  
 
+Interrupt: 전기 신호를 통한 끼어들기  
++) 그렇게 큰 일이 아니면서도, 내가 그일을 먼저 하게 만들어서 그 일 먼저 처리하고, 원해 하던 일을 계속 하게 만듬  
++) ARM은 Interrupt가 걸ㄹ미ㅕㄴ exception vector 중 IRQ나 FIQ vector를 실행하고, 해당 vector가 실제 handler로 branch하기 위한 code가 존재  
++) IRQ, FIQ Handler  
++) Interrupt Service Routine (ISR): 각 intrrupt 별 응답  
++) MCU안에 Interrupt Controller가 존재하며, 외부나 내부 pin과 control bus연결을 통해 전달  
++) CPU interface에서는 nIRQ나 nFIQ로 연결  
++) interrupt는 system이 하던 일 중간에 짬내서 처리하는 것으로, 짧고 간결하게 handle하는 것이 좋음  
 
+ARM SoC: System on Chip  
++) ARM은 cpu architecture를 파는 회사  
++) 다른 회사에서 이 architecture를 기반으로 MCU (Micro controller unit) 또는 MPU (Micro processor unit)을 만들어 business  
++) SoC: core에 여러가지 기능을 덧붙여서 한개의 chip을 만든 것  
++) SoC 내부에 각 기능별로 된 block을 IP(intellectual property)라고 명명  
++) AMBA protocal: ARM core와 다른 IP끼리 interaction에 대한 intecommunication을 위한 bus protocol  
 
-
+AMBA (Advanced Microcontroller Bus Architecture): Bus들을 어떻게 연결하고, IP끼리 서로 어떻게 통신할 것이냐를 약속한 것  
++) SoC Target In-chip bus protocol  
++) ARM에서 주도  
+Bus Interface: Bus 위에 Data를 어떻게 전송할거냐, 어떻게 받을 거냐를 잘 Control 해주는 Interface  
++) AMBA에서는 3가지 종류
++) AHB(Advanced High Performce Bus): 빠른속도, Processor, RAM, NAND등 Burst Mode의 Data 전송에 이용  
++) ASB(Advanced System Bus): APB보다 이전에 쓰이던 것으로, 주소,제어,데이터 라인이 모두 분리 및 양방형, 주소와 데이터 번갈아 쏴 burst 어려움  
++) APB(Advanced Peripheral Bus): 나름 빠르지 않은 전송 속도를 필요로하는 주변장치, Multiplex Bus 기반 (주소라인, 제어라인, 데이터 라인 모두 공유하고 주소 쏜 후 데이터 쏴주는 Burst 데이터 전송 기법 활용)  
++) 이들간의 연결이 필요하면 BRIDGE 활용: 속도가 다른 bus끼리 연결  
