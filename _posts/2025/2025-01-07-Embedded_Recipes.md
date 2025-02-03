@@ -316,3 +316,23 @@ Bus Interface: Bus 위에 Data를 어떻게 전송할거냐, 어떻게 받을 �
 +) ASB(Advanced System Bus): APB보다 이전에 쓰이던 것으로, 주소,제어,데이터 라인이 모두 분리 및 양방형, 주소와 데이터 번갈아 쏴 burst 어려움  
 +) APB(Advanced Peripheral Bus): 나름 빠르지 않은 전송 속도를 필요로하는 주변장치, Multiplex Bus 기반 (주소라인, 제어라인, 데이터 라인 모두 공유하고 주소 쏜 후 데이터 쏴주는 Burst 데이터 전송 기법 활용)  
 +) 이들간의 연결이 필요하면 BRIDGE 활용: 속도가 다른 bus끼리 연결  
+Master: Slave에게 Read나 Write 요청, Data를 Bus에 흘리고자 하는 주체  
+Slave: 요청을 받아 실행, 성공/실패/wait을 master에게 report  
+Arbter: bus를 누가 쓸 건지에 대한 결정권 가짐  
+Device Control 순서  
++) Master가 뭔가 하고 싶을 때 Arbiter에게 Bus 사용 요청 (HBUSREQ)  
++) 사용 가능하면 HGRANT 신호를 통해 허가  
++) Master가 사용 의미로 HLOCKx 신호를 Arbiter에 전송 (x는 0~15가 가능한 Master의 번호)  
++) 허가를 얻은 Master는 접근하고자 하는 Slave 주소를 (HADDR)을 날림  
++) Decoder는 그것을 보고 HSELx 신호를 통해 Slave에 날려 활성화 (x는 0~15가 가능한 Slave의 번호)  
++) Master에서 write/read를 수행하겠다는 의미로 HWRITE 신호를 High/Low하게 slave에 날림  
++) 활성화된 Slave는 준비가 되었다는 의미로 HREADY 신호 날림  
++) Write면 Master가 HWDATA선에다 Data를 날림, Read면 Slave가 HRDATA에 data를 날림  
+Master와 Slave 사이에 HTRANS, HBURST등의 여러 control pin 존재  
+
+Little Endian과 Big Endian: processor가 memory에 데이터를 저장하는 방식  
++) Little Endian은 상위 bit (MSB)를 상위 주소 (더 큰 값) 에 저장  
++) Big Endian은 상위 bit을 하위 주소(낮은 값)에 저장  
++) bit endian이 사람이 읽기 편한 순서  
+
+
