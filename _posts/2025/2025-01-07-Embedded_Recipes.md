@@ -12,7 +12,7 @@ toc: true
 
 해당 카테고리에서는 **Embedded Recipes**을 공부하면서 기억해 둘 것을 정리해논 곳 입니다.  
 Start: 2025 01 07
-Last: 2025 01 20
+Last: 2025 02 03
 End:
 
 # 1. Hardware Collage
@@ -335,4 +335,23 @@ Little Endian과 Big Endian: processor가 memory에 데이터를 저장하는 �
 +) Big Endian은 상위 bit을 하위 주소(낮은 값)에 저장  
 +) bit endian이 사람이 읽기 편한 순서  
 
+Compile: 프로세서가 해석할 수 있는 명령어를 만드는 것  
++) 기계어(Native Code, 명령어): 프로세서가 해석할 수 있도록 약속된 특정한 bit pattern  
++) 프로그램: 일련의 기계어 명령의 순차적 집합  
++) Assembly: 기계어와 1:1로 matching이 된 사람이 보기 쉬운 푯기 체제  
++) Assembler: compile의 최초 태동으로, assembly를 기계어로 바꾸어 주는 것, 특정 프로세서에만 통함(프로세서마다 다른 assembler 지원, compatibility 호화성이 떨어짐)   
++) High Level Language compiler: High level lanuage로 coding을 하고, 동작하고자 하는 processor 맞는 compiler를 통해 그 프로세서에 동작 가능한 assembly를 generation 하는 것  
++) C 코딩 -> C compiler -> Arm Assembly -> ARM Assembler -> Bit Pattern  
++) Executable binary image: 이러한 bit battern을 한 덩어리로 뭉쳐 놓은 것  
+Cross Compile: 실제 target에서 돌아갈 binary imange를 PC 상에서 comppile 할 수 있게 해주는 환경  
++) 일반적으로 PC에서 컴파일 한 것은 PC에서 실행되는 것이 정상  
++) embeeded system에서는 target에서 컴파일 수행에 어려움이 있어, 이런 환경에서 binary image를 PC 상에서 만듬  
 
+대략적 컴파일 과정  
++) Source file (.c .s)를 C compiler (armcc, tcc)를 이용하여 Assembly로 만들고 (.s), Assembler(armasm)를 이용하여 실행 가능하고 symbol 정보를 가진 elf object 파일 (Elf - Excutable and linkable format, .o)으로 만든 뒤, 이 object file을 linker (armlink)가 엮어 실행 파일인 .elf을 생성함. 이 실행 파일을 실행하면 그 안에 있는 Native Code (기계어)인 binary가 추출되어 메모리에 로드되고, 프로세서가 이를 실행함  
++) link: 여러 개의 .c file을 Assembly로 만든 후 Assembler를 이용하여 Object라는 새로운 기계어 형태로 만들어내고 이런 object들을 연결 하는 것  
++) object는 elf와 같은 형태로 각기 다른 .c를 컴파일한 object와 연결할 수 있는 정보와 디버깅이 가능한 symbol 정보를 담고 있음  
++) armcc, tcc는 .c를 .s로 만들기 전에 preprocessor 일도 진행 (macro나 define을 compile 전 바꿔치기하거나, syntax error등 점검, 컴파일 하는 단계까지 만들어 두는 일)  
++) lib file: source code를 제공하고 싶지 않은 개발자가 object 형식으로 미리 컴파일하여 제공하고, lbi은 다른 컴파일 된 object들과 link되어 같이 물려 들어가는 형식을 취함  
++) link 시에 scl (scatter loading)이 들어가는데, binary를 만들 때의 구조를 설정하는 script file  
++) map, sym file은 compile된 binary의 메모리 구성을 나타내주는 text file  
