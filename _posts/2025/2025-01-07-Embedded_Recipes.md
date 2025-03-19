@@ -355,3 +355,41 @@ Cross Compile: 실제 target에서 돌아갈 binary imange를 PC 상에서 compp
 +) lib file: source code를 제공하고 싶지 않은 개발자가 object 형식으로 미리 컴파일하여 제공하고, lbi은 다른 컴파일 된 object들과 link되어 같이 물려 들어가는 형식을 취함  
 +) link 시에 scl (scatter loading)이 들어가는데, binary를 만들 때의 구조를 설정하는 script file  
 +) map, sym file은 compile된 binary의 메모리 구성을 나타내주는 text file  
+
+spaghetti.h, spaghetti.c를 구현  
+preprocess를 하면 #inlcude를 처리하여 한 파일로 만들고 #define 메크로 정리 및 compile error 검사하여 spaghetti.i 생성  
++) #include <>는 compiler predefine path, #include "" 는 .c가 있는 directory  
+
+Library: 미리 컴파일 해 놓은 Object fiole 모음  
++) 자주 사용하는 함수들을 굳이 Compile 할 때마다 새로 할 것이 아니라, 미리 만들어 Link할 때만 연결  
++) source 코드 공개 안해도 됨  
++) compile 된 object file들을 압축해서 한 개의 file로 관리하는 것 
++) libaray를 archive file이라고도 부름  
++) arm에서 archive(file을 압축하는 것)는 armar을 사용  
++) 이것을 활용하여 여러 object 파일을 libaray로 한들거나 하나만 빼거나 하나만 추가하거나 등 할 수 있음  
+
+변수의 scope에 따른 유형  
++) auto: 일반적 local 정의 변수  
++) extern: 일반적 global 정의 변수, 다른 file에서도 extern하면 사용 가능  
++) static: local에 사용 시 생존 기간 (함수 등)이 동료되더라도 그 값을 유지, global에 사용 시 다른 file에서 사용하지 못하게함 (접근성을 선언한 곳으로 국한, local도 마찬가지)  
++) volatile: optimization하지말라는 의미
+
+Symbol: Compier/Linker가 알아볼 수 있는 기본 단위로 link 후 자신만의 주소를 갖게 되는 특별한 단위  
++) 전역변수 함수이름 등  
++) Linker를 위하여 ELF object file내에 symbol table을 만들어둠, source code에 의하여 참조되는 symbol들의 이름가 위치 정보
++) 실제 메모리에 적재되는 내용은 아님, Linker 만이 이 symbol을 참조하며, 실제로 Linker는 이른 symbol들을 모두 주소로 변환해서 binary로 만듬  
+Symbol을 필자는 global이라 부름  
++) 함수, 전역변수, static 변수, 등을 포함하며 필자는 global이라 부름 => 다른 파일의 함수들도 직접 access 가능  
++) symbol 같이 자기 자신만의 주소를 가지지 못한느 것은 local  
+Symbol (절대 주소를 가지는 변수)을 세가지로 나누고 memory에 자리 잡는 것을 살펴보면,  
++) RW: read write로 초기값이 있는 전역 변수 (.data), 초기값이 존재하고 변화 가능임으로 ROM과 RAM 모두  
++) ZI: zero initialized로 초기값이 0인 전역 변수 (.bss), 변화 가능임으로 RAM에 만 있어도 됨  
++) RO: read only로 수정이 불가능한 const 전역 변수와 text인 code를 의미 (.text, .constdata), 변화 불가로 ROM에만 있으면 됨  
+절대 주소가 아니고 그때 그때 사용하고 버리는 변수(temporary)는 
++) local 변수는 stack에 자리 잡음  
++) Dynamic Memory Allocation 변수는 heap에 자리 잡음  
+
+
+
+
+
