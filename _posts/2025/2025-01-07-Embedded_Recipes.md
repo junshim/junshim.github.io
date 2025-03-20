@@ -389,7 +389,8 @@ Symbol (절대 주소를 가지는 변수)을 세가지로 나누고 memory에 �
 +) local 변수는 stack에 자리 잡음  
 +) Dynamic Memory Allocation 변수는 heap에 자리 잡음  
 
-
+ELF: executable and linking format, 실행 가능한 그리고 링크를 하는 형식  
+ELF object file: relocatable 파일이락도 하며, 실행은 불가하지만 link가 가능한 object file, table 형태
 
 
 
