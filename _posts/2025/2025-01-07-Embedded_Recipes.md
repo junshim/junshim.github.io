@@ -390,7 +390,34 @@ Symbol (절대 주소를 가지는 변수)을 세가지로 나누고 memory에 �
 +) Dynamic Memory Allocation 변수는 heap에 자리 잡음  
 
 ELF: executable and linking format, 실행 가능한 그리고 링크를 하는 형식  
-ELF object file: relocatable 파일이락도 하며, 실행은 불가하지만 link가 가능한 object file, table 형태
+ELF object file: 실행은 불가하지만 link가 가능한 object file
++) relocatable 파일이락도 하며  
++) Assembler에 통과시킨 컴파일한 후의 link가능한 table 형태  
++) Assembler의 output  
+ELF형태 중, Link 하기 전의 object file은 linking view, Link가 끝나 실행 가능한 형태를 execution view  
+ELF Header: elf file의 특징을 결정하는 endian, 운영체제, CPU 정보, 내부 각 section의 시작 offset 등의 정보  
+ELF 기본 구조: ELF header, opcode 기계어, data, link를 위한 기타 section  
+Linker는 object file로 부터 elf table을 보고 서로간의 연결을 수행  
 
+Link시 실제 함수 정의부의 위치와 전역변수들의 위치를 libarary file과 object file에서 차례로 조사한 후 모두 table로 가지고 있다가, 그 주소를 함수 호출 코드 부분에 기록해 넣는 것이 Linker가 하는 일  
++) Linker는 모든 input object file들의 모든 코드와 데이터를 가지는 실행 가능한 새로운 object file을 만들어냄  
++) 연결 전의 object file들은 정보가 없으면 구멍을 만들어둠  
++) 여러 object file의 같은 section 끼리 모은 뒤, 서로 연결 (구멍을 메워줌)  
++) Relocatable object files들을 모아 executable object file로 만듬  
++) linker는 object file들을 ram에 모아 정보들을 가지고 executable elf를 만듬  
++) symbol간의 충돌이 발생하면 특정룰로 하나를 선택함, 에러가 나거나  
 
+XIP(eXecution In Place): word 단위의 access가 가능하여 software를 execution할 수 있는 것, Flash 소자에 용례를 국한하기도 함  
+Linker Descript Script(Scatter Loading): Linker를 통하여 최종 실행 image를 만들 때. XIP가 가능한 memory에 code를, 그리고 Data는 Read Write가 가능한 영역에 mapping시켜 배치하는 것  
+Memory에는 여러 Region 존재  
+Region은 Output Section들의 모임    
+Output section은 Input section들의 모임  
++) Input section은 RO, RW, ZI 중 하나의 속성을 갖는 집합, 하나의 object는 여러 이것으로 이루어짐  
++) Output section은 input section의 속성들의 뭉탱이  
++) Region은 실제 메모리에 올라가는 단위  
 
+메모리 구성 시 두가지 관점에서 봐야함  
+Load view: software가 실행되기 전에 저장매체에 담겨 있을 때의 모습, flash, rom에 적재 되어 있을 때    
+Execution View: software가 막상 실행 될 때의 모습, 실제 image가 실행될 때     
+이를 scatter 파일을 통해 위리츷 지정해서 linker에게 input으로 넣을 수 있음  
+이를 사용하지 않으며 default memory ma이라는 간단한 memory layout이 default로 적용 됨  
