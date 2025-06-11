@@ -421,3 +421,71 @@ Load view: software가 실행되기 전에 저장매체에 담겨 있을 때의 
 Execution View: software가 막상 실행 될 때의 모습, 실제 image가 실행될 때     
 이를 scatter 파일을 통해 위리츷 지정해서 linker에게 input으로 넣을 수 있음  
 이를 사용하지 않으며 default memory ma이라는 간단한 memory layout이 default로 적용 됨  
+
+Map file: linker가 출력하는 것으로 프로그램이 메모리에 어떻게 배치되는지 보여주는 메모리 배치 정보 파일  
++) Image Symbol Table  
++) Memory Map of the image  
++) Image component sizes  
++) 전체 layout  
+
+c file을 가지고 compiler를 하여 object file을 만들어 낸 후에 이 녀석들을 linker로 묶은 뒤, 내가 원하는 형태의 memory layout으로 묶는 것이 목표  
+
+Makefile
++) 여러 단계의 컴파일을 묶어 한번에 처리할 수 있게 해줌  
+
+ARM Asembly Structure & Syntex
+ARM Assembly (ADS)  
++) Directive, Lable, Instruction, Comment  
+Area: Code의 모음  
++) 어떤 assembly의 block의 속성을 정해줄 수 있음  
++) (ALIGN, CODE, DATA, COMDEF, COMMON, NOINIT, READONLY, READWRITE)  
++) 이름을 가짐  
++) Scatter Loading 등에서 메모리에서의 위치를 지정할 수 있음  
++) ELF file formant에서 section임, linker가 다루는 최소 단위, 나눌 수 없음  
++) Linker는 AREA 단위로 주소를 할당함  
+ENTRY  
++) AREA에 따라 붙으면, 수행 되어야할 첫 번째 위치  
++) CODE32/CODE16: 32 bit arm 코드인지 16 bit thumb code인지 알려줌  
++) LABELS: 코딩하는 사람 맘대로 이름 붙인 이름표, 이름표 자체가 Symbol의 의미가 되어 그 주소를 의미하게됨  
+END
++) Assembly로 짜여진 file의 끝을 의미  
+함수이름 PROC  
++) 함수가 시작된다는 의미  
+ENDP  
++) 함수가 종료된다는 의미  
+ALIGN  
++) 해당 bit 수 만큼 compiler가 정렬  
+EQU
++) c에서의 #define고 ㅏ동일  
+MACRO  
++) 매크로, MEND로 끝남  
+
+ADS vs GNU  
++) ARM 사의 ADS나 RVCT라는 컴파일러와 GNU의 컴파일러 사이의 Assembly syntax grammar는 거의 1:1로 매칭  
++) Directive가 소문자, 앞에 .으로 시작하는 것만 다름  
+    
+Assembly 명렁어, 특징, syntax  
++) 명령어 == opcode == instruction
++) 조건이나 덧붙임 == operand == 레지스터 어떻게 다룰거냐 등  
+Barnch 명령어: pc에 주소 넣고 넣어진 주소로 프로그램 실행 번지를 바꾸는 역할  
+Data Processing 명령어: 대상 레지스터 Rd에 뭔가 장난쳐서 집어 넣는 것  
+Load/Store: 대상 레지스터에 Memory 주소가 가르키는 곳의 값을 가져오는 일  
+의사 명령어: LDR, ADR, 32 bit을 상수를 한 instrcution에서 처리하기 어려워 주로 사용  
+SWAP 명령어: 일반 memory 영역의 값과 register 값을 바꿔치는데 사용  
+PSR 명령: CPSR과 SPSR 두개와 일반 register 사이에 값을 서로 복사할 수 있는 명령어, MRS,MSR  
+SWI 명령어: software interrupt 명령, software가 exception을 일부러 발생 시킬 수 있는 유일한 명령어  
+DCD directives: 이 directive 를 만나면 data를 위한 메모리를 할장해줌  
+EXPORT, IMPORT directive: assembly에서 사용된 symbol을 위부에서 사용가능하도록 해주는 것  
+FIELD, MAP: c에서의 struct와 비슷  
+!/S/^: 덧붙임 명령어  
+
+ARM Thimb mode
++) word란 CPU가 한번에 처리할 수 있는 크기  
++) Thumb mode는 무조건 16 bit 명령어 체계  
++) 32 bit ARM이 만들어질 때 business 관점에서 생김, 대부분 16 bit data line memory가 시대의 주인공 이었음  
++) ARM 컴파일은 armcc, Thumb 컴파일은 tcc  
++) ARM 명령어는 조건부 실행이 대부분이며 이떄 CPSR이 주로 활용됨, Thumb는 뭊건적 실행    
++) Stack 명령어가 다름, ARM은 multiple register transfer 명령어, thumb는 push pop  
+
+
+
